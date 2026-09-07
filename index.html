@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refiere y gana tu especialidad internacional | EPG USIL</title>
+<meta name="description" content="Formulario de referidos de la Escuela de Posgrado USIL. Refiere a un colaborador o conocido a una maestría o doctorado y gana tu especialidad internacional.">
+
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --blue: #173179;
+    --blue-dark: #0E1F52;
+    --blue-pale: #EEF1F9;
+    --blue-pale-2: #E2E7F5;
+    --gold: #A87C34;
+    --gold-pale: #F6EFE1;
+    --ink: #1B2033;
+    --slate: #5B6478;
+    --slate-soft: #8890A2;
+    --paper: #FBFBF9;
+    --card: #FFFFFF;
+    --border: #DDE1EC;
+    --error: #B3261E;
+    --error-bg: #FBEAE9;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 2px rgba(15, 23, 60, 0.04), 0 8px 24px rgba(15, 23, 60, 0.06);
+    --max: 700px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px 96px;
+  }
+
+  /* ---------- Header ---------- */
+
+  .topbar{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 28px 0 0;
+    color: var(--blue);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  .topbar .mark{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.4px solid var(--blue);
+    display: grid;
+    place-items: center;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .topbar .name{ font-weight: 500; color: var(--slate); }
+  .topbar .name b{ color: var(--blue); font-weight: 600; }
+
+  header.hero{
+    position: relative;
+    padding: 40px 0 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: rise 700ms cubic-bezier(.2,.7,.3,1) 120ms forwards;
+  }
+  @keyframes rise{ to{ opacity: 1; transform: translateY(0); } }
+
+  .seal{
+    position: absolute;
+    top: 20px;
+    right: -6px;
+    width: 108px;
+    height: 108px;
+    color: var(--blue);
+    opacity: 0.14;
+    pointer-events: none;
+  }
+
+  h1{
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: clamp(30px, 5vw, 42px);
+    line-height: 1.14;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    max-width: 12ch;
+    color: var(--blue-dark);
+  }
+
+  .subtitle{
+    font-size: 17px;
+    color: var(--slate);
+    max-width: 46ch;
+    margin: 0 0 22px;
+  }
+
+  .rule-note{
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--blue-pale);
+    border: 1px solid var(--blue-pale-2);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 14.5px;
+    color: var(--blue-dark);
+    margin-bottom: 8px;
+  }
+  .rule-note svg{ flex-shrink: 0; margin-top: 2px; color: var(--blue); }
+
+  /* ---------- Deadline banner ---------- */
+  .deadline{
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 14.5px;
+    margin: 28px 0 4px;
+    background: var(--gold-pale);
+    border: 1px solid #E9D9B8;
+    color: #6B4E1E;
+  }
+  .deadline svg{ flex-shrink: 0; margin-top: 2px; color: var(--gold); }
+  .deadline.expired{
+    background: var(--error-bg);
+    border-color: #F0C4C1;
+    color: #7A241D;
+  }
+  .deadline.expired svg{ color: var(--error); }
+  .deadline strong{ font-weight: 600; }
+
+  /* ---------- Form sections ---------- */
+
+  form{ margin-top: 28px; }
+
+  .section{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 26px 8px;
+    margin-bottom: 22px;
+  }
+  .section.auth{ border-left-color: var(--gold); }
+
+  .section-head{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .badge{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--blue-pale);
+    border: 1px solid var(--blue-pale-2);
+    color: var(--blue);
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .section.auth .badge{ background: var(--gold-pale); border-color: #E9D9B8; color: var(--gold); }
+
+  .section-head h2{
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+    color: var(--ink);
+  }
+  .section-head p{
+    margin: 2px 0 0;
+    font-size: 13.5px;
+    color: var(--slate-soft);
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 20px;
+  }
+  .field{ margin-bottom: 20px; }
+  .field.full{ grid-column: 1 / -1; }
+
+  label{
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 7px;
+  }
+  label .req{ color: var(--gold); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select{
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1.4px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    appearance: none;
+  }
+  select{
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'><path d='M1 1L7 7L13 1' stroke='%235B6478' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+  }
+  input::placeholder{ color: var(--slate-soft); }
+
+  input:focus, select:focus{
+    outline: none;
+    border-color: var(--blue);
+    background: #fff;
+    box-shadow: 0 0 0 3.5px var(--blue-pale-2);
+  }
+  input[aria-invalid="true"], select[aria-invalid="true"]{
+    border-color: var(--error);
+    background: var(--error-bg);
+  }
+  input[aria-invalid="true"]:focus, select[aria-invalid="true"]:focus{
+    box-shadow: 0 0 0 3.5px #F3D3D1;
+  }
+
+  .error-msg{
+    display: none;
+    font-size: 13px;
+    color: var(--error);
+    margin-top: 6px;
+  }
+  .error-msg.show{ display: block; }
+
+  /* Sí/No toggle */
+  .toggle-group{
+    display: flex;
+    gap: 10px;
+  }
+  .toggle-option{
+    flex: 1;
+    position: relative;
+  }
+  .toggle-option input{
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    cursor: pointer;
+  }
+  .toggle-option span{
+    display: block;
+    text-align: center;
+    padding: 11px 10px;
+    border: 1.4px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--slate);
+    background: var(--paper);
+    transition: all 140ms ease;
+  }
+  .toggle-option input:focus-visible + span{
+    box-shadow: 0 0 0 3.5px var(--blue-pale-2);
+  }
+  .toggle-option input:checked + span{
+    border-color: var(--blue);
+    background: var(--blue);
+    color: #fff;
+  }
+
+  /* Checkboxes */
+  .check-row{
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+  }
+  .check-row:first-child{ border-top: none; }
+  .check-row input{
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--blue);
+    cursor: pointer;
+  }
+  .check-row label{
+    font-size: 14.5px;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0;
+    cursor: pointer;
+  }
+  .check-row .error-msg{ margin-top: 4px; }
+
+  /* ---------- Submit area ---------- */
+
+  .submit-area{ margin-top: 8px; }
+
+  button#submit-btn{
+    width: 100%;
+    padding: 16px 20px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--blue);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 160ms ease, transform 100ms ease;
+  }
+  button#submit-btn:hover{ background: var(--blue-dark); }
+  button#submit-btn:active{ transform: translateY(1px); }
+  button#submit-btn:disabled{
+    background: var(--slate-soft);
+    cursor: not-allowed;
+  }
+  button#submit-btn .spinner{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    margin-right: 9px;
+    vertical-align: -3px;
+    animation: spin 700ms linear infinite;
+    display: none;
+  }
+  button#submit-btn.loading .spinner{ display: inline-block; }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  .network-error{
+    display: none;
+    margin-top: 14px;
+    background: var(--error-bg);
+    border: 1px solid #F0C4C1;
+    color: #7A241D;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  .network-error.show{ display: flex; gap: 10px; align-items: flex-start; }
+  .network-error button{
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: #7A241D;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+    font-family: inherit;
+  }
+
+  .fine-print{
+    font-size: 12.5px;
+    color: var(--slate-soft);
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  /* ---------- Success panel ---------- */
+
+  .success-panel{
+    display: none;
+    text-align: center;
+    padding: 52px 30px 44px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-top: 28px;
+  }
+  .success-panel.show{
+    display: block;
+    animation: rise 500ms cubic-bezier(.2,.7,.3,1) forwards;
+  }
+  .success-icon{
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    background: var(--blue-pale);
+    display: grid;
+    place-items: center;
+    color: var(--blue);
+  }
+  .success-panel h2{
+    font-family: 'Source Serif 4', serif;
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0 0 14px;
+    color: var(--blue-dark);
+  }
+  .success-panel p{
+    font-size: 15.5px;
+    color: var(--slate);
+    max-width: 46ch;
+    margin: 0 auto 16px;
+  }
+  .success-code{
+    display: inline-block;
+    font-family: 'Source Serif 4', serif;
+    font-size: 13.5px;
+    color: var(--blue);
+    background: var(--blue-pale);
+    border: 1px solid var(--blue-pale-2);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-top: 6px;
+  }
+  .duplicate-note{
+    margin: 20px auto 0;
+    max-width: 48ch;
+    background: var(--gold-pale);
+    border: 1px solid #E9D9B8;
+    color: #6B4E1E;
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-size: 14px;
+    text-align: left;
+    display: flex;
+    gap: 10px;
+  }
+  .duplicate-note svg{ flex-shrink: 0; margin-top: 2px; color: var(--gold); }
+
+  @media (max-width: 560px){
+    .grid{ grid-template-columns: 1fr; }
+    .section{ padding: 24px 18px 4px; }
+    .seal{ width: 76px; height: 76px; top: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <span class="mark">U</span>
+    <span class="name">Escuela de Posgrado · <b>USIL</b></span>
+  </div>
+
+  <header class="hero">
+    <svg class="seal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="50" cy="50" r="37" stroke="currentColor" stroke-width="1"/>
+      <path d="M30 44V60C30 68 38 74 50 74C62 74 70 68 70 60V44" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M50 26L30 36L50 46L70 36L50 26Z" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M30 36V50" stroke="currentColor" stroke-width="1.4"/>
+    </svg>
+
+    <h1>Refiere y gana tu especialidad internacional</h1>
+    <p class="subtitle">Completa tus datos y los de tu referido.</p>
+
+    <div class="rule-note">
+      <svg width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8.3" stroke="currentColor" stroke-width="1.4"/><path d="M10 9V14.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.3" r="1" fill="currentColor"/></svg>
+      <span>Recuerda: el beneficio se asigna al primer registro recibido, en caso de que un mismo referido sea registrado por más de un participante.</span>
+    </div>
+  </header>
+
+  <div id="deadline-banner" class="deadline">
+    <svg width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8.3" stroke="currentColor" stroke-width="1.4"/><path d="M10 5.5V10.2L13 12.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span id="deadline-text">Este formulario debe completarse hasta el <strong>jueves 10 de setiembre</strong>. Los registros posteriores a esa fecha no serán considerados para el beneficio.</span>
+  </div>
+
+  <form id="referral-form" novalidate>
+
+    <!-- Bloque 1 -->
+    <section class="section">
+      <div class="section-head">
+        <span class="badge">1</span>
+        <div>
+          <h2>Tus datos</h2>
+          <p>Como colaborador que refiere</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="field full">
+          <label for="ref_nombre">Nombre completo<span class="req">*</span></label>
+          <input type="text" id="ref_nombre" name="ref_nombre" placeholder="Ej. María Fernanda Torres Ríos" autocomplete="name">
+          <div class="error-msg" data-error-for="ref_nombre">Ingresa tu nombre completo</div>
+        </div>
+
+        <div class="field">
+          <label for="ref_documento">N° de documento (DNI/CE)<span class="req">*</span></label>
+          <input type="text" id="ref_documento" name="ref_documento" placeholder="Ej. 71234567" inputmode="numeric" autocomplete="off">
+          <div class="error-msg" data-error-for="ref_documento">Ingresa un número de documento válido</div>
+        </div>
+
+        <div class="field">
+          <label for="ref_correo">Correo electrónico<span class="req">*</span></label>
+          <input type="email" id="ref_correo" name="ref_correo" placeholder="Ej. maria.torres@usil.pe" autocomplete="email">
+          <div class="error-msg" data-error-for="ref_correo">Ingresa un correo electrónico válido</div>
+        </div>
+
+        <div class="field">
+          <label for="ref_celular">Celular / WhatsApp<span class="req">*</span></label>
+          <input type="tel" id="ref_celular" name="ref_celular" placeholder="Ej. 987654321" inputmode="numeric" autocomplete="tel">
+          <div class="error-msg" data-error-for="ref_celular">Ingresa un número de celular válido</div>
+        </div>
+
+        <div class="field">
+          <label for="ref_programa">Programa que cursa actualmente<span class="req">*</span></label>
+          <select id="ref_programa" name="ref_programa">
+            <option value="" selected disabled>Selecciona tu programa</option>
+            <option value="MBA">MBA</option>
+            <option value="Maestría en Gestión de Proyectos">Maestría en Gestión de Proyectos</option>
+            <option value="Maestría en Finanzas">Maestría en Finanzas</option>
+            <option value="Maestría en Marketing Digital">Maestría en Marketing Digital</option>
+            <option value="Maestría en Recursos Humanos">Maestría en Recursos Humanos</option>
+            <option value="Doctorado en Administración">Doctorado en Administración</option>
+            <option value="Doctorado en Educación">Doctorado en Educación</option>
+            <option value="Otro programa EPG">Otro programa EPG</option>
+          </select>
+          <div class="error-msg" data-error-for="ref_programa">Selecciona el programa que cursas</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bloque 2 -->
+    <section class="section">
+      <div class="section-head">
+        <span class="badge">2</span>
+        <div>
+          <h2>Datos de tu referido</h2>
+          <p>La persona que quieres referir</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="field full">
+          <label for="inv_nombre">Nombre completo<span class="req">*</span></label>
+          <input type="text" id="inv_nombre" name="inv_nombre" placeholder="Nombre y apellidos de tu referido" autocomplete="off">
+          <div class="error-msg" data-error-for="inv_nombre">Ingresa el nombre completo de tu referido</div>
+        </div>
+
+        <div class="field">
+          <label for="inv_documento">N° de documento (DNI/CE)<span class="req">*</span></label>
+          <input type="text" id="inv_documento" name="inv_documento" placeholder="Número de documento" inputmode="numeric" autocomplete="off">
+          <div class="error-msg" data-error-for="inv_documento">Ingresa un número de documento válido</div>
+        </div>
+
+        <div class="field">
+          <label for="inv_correo">Correo electrónico<span class="req">*</span></label>
+          <input type="email" id="inv_correo" name="inv_correo" placeholder="correo@ejemplo.com" autocomplete="off">
+          <div class="error-msg" data-error-for="inv_correo">Ingresa un correo electrónico válido</div>
+        </div>
+
+        <div class="field">
+          <label for="inv_celular">Celular / WhatsApp<span class="req">*</span></label>
+          <input type="tel" id="inv_celular" name="inv_celular" placeholder="987654321" inputmode="numeric" autocomplete="off">
+          <div class="error-msg" data-error-for="inv_celular">Ingresa un número de celular válido</div>
+        </div>
+
+        <div class="field">
+          <label for="inv_programa">Programa de interés<span class="req">*</span></label>
+          <select id="inv_programa" name="inv_programa">
+            <option value="" selected disabled>Selecciona el programa de interés</option>
+            <option value="MBA">MBA</option>
+            <option value="Maestría en Gestión de Proyectos">Maestría en Gestión de Proyectos</option>
+            <option value="Maestría en Finanzas">Maestría en Finanzas</option>
+            <option value="Maestría en Marketing Digital">Maestría en Marketing Digital</option>
+            <option value="Maestría en Recursos Humanos">Maestría en Recursos Humanos</option>
+            <option value="Doctorado en Administración">Doctorado en Administración</option>
+            <option value="Doctorado en Educación">Doctorado en Educación</option>
+            <option value="Aún no lo decide">Aún no lo decide</option>
+          </select>
+          <div class="error-msg" data-error-for="inv_programa">Selecciona el programa de interés de tu referido</div>
+        </div>
+
+        <div class="field full">
+          <label>¿Ya inició su proceso de admisión?<span class="req">*</span></label>
+          <div class="toggle-group" role="radiogroup" aria-label="¿Ya inició su proceso de admisión?">
+            <label class="toggle-option">
+              <input type="radio" name="inv_admision" value="Sí" id="admision_si">
+              <span>Sí</span>
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="inv_admision" value="No" id="admision_no">
+              <span>No</span>
+            </label>
+          </div>
+          <div class="error-msg" data-error-for="inv_admision">Selecciona una opción</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bloque 3 -->
+    <section class="section auth">
+      <div class="section-head">
+        <span class="badge">3</span>
+        <div>
+          <h2>Autorizaciones</h2>
+          <p>Necesarias para procesar tu registro</p>
+        </div>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="auth_referido" name="auth_referido">
+        <label for="auth_referido">Declaro contar con la autorización de la persona referida para compartir sus datos personales con la Escuela de Posgrado USIL con fines de contacto y seguimiento comercial.</label>
+      </div>
+      <div class="error-msg" data-error-for="auth_referido">Debes confirmar que cuentas con la autorización de tu referido para continuar.</div>
+
+      <div class="check-row">
+        <input type="checkbox" id="auth_politica" name="auth_politica">
+        <label for="auth_politica">Acepto la Política de Tratamiento de Datos Personales de USIL, en concordancia con la Ley N° 29733.</label>
+      </div>
+      <div class="error-msg" data-error-for="auth_politica">Debes aceptar la política de tratamiento de datos para enviar el formulario.</div>
+    </section>
+
+    <div class="submit-area">
+      <button type="submit" id="submit-btn">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="btn-label">Enviar registro</span>
+      </button>
+      <div class="network-error" id="network-error">
+        <span>No pudimos enviar tu registro por un problema de conexión.</span>
+        <button type="button" id="retry-btn">Reintentar</button>
+      </div>
+      <p class="fine-print">Tus datos y los de tu referido se tratan conforme a la Ley N° 29733 de Protección de Datos Personales.</p>
+    </div>
+  </form>
+
+  <div class="success-panel" id="success-panel" role="status" aria-live="polite">
+    <div class="success-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5L9.5 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>¡Registro recibido!</h2>
+    <p>Hemos recibido tu registro. Si tu referido se matricula, te confirmaremos tu cupo gratuito en la especialidad de ESIC por este mismo correo. Recuerda que, si tu referido ya fue registrado por otro participante, el beneficio se asigna a quien lo registró primero según fecha y hora.</p>
+    <div class="success-code" id="success-code"></div>
+
+    <div class="duplicate-note" id="duplicate-note" style="display:none;">
+      <svg width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8.3" stroke="currentColor" stroke-width="1.4"/><path d="M10 9V14.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.3" r="1" fill="currentColor"/></svg>
+      <span>Por cierto, este referido ya había sido registrado anteriormente (por ti o por otro colaborador) y ya contamos con sus datos. Puedes seguir participando registrando a otra persona.</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+
+  // ------------------------------------------------------------------
+  // Reemplaza esta constante con la URL de tu Web App de Google Apps Script
+  // (Implementar > Nueva implementación > Aplicación web).
+  // ------------------------------------------------------------------
+  const SCRIPT_URL = "PEGAR_URL_AQUI";
+
+  const form = document.getElementById('referral-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnLabel = submitBtn.querySelector('.btn-label');
+  const networkError = document.getElementById('network-error');
+  const retryBtn = document.getElementById('retry-btn');
+  const successPanel = document.getElementById('success-panel');
+  const successCode = document.getElementById('success-code');
+  const duplicateNote = document.getElementById('duplicate-note');
+
+  // ---------- Plazo (jueves 10 de setiembre, fin de día hora Perú UTC-5) ----------
+  const deadlineBanner = document.getElementById('deadline-banner');
+  const deadlineText = document.getElementById('deadline-text');
+  const DEADLINE_UTC = new Date('2026-09-11T04:59:59Z'); // 10-sep 23:59 hora Perú (UTC-5)
+
+  function checkDeadline(){
+    if (Date.now() > DEADLINE_UTC.getTime()){
+      deadlineBanner.classList.add('expired');
+      deadlineText.innerHTML = 'El plazo para este formulario venció el <strong>jueves 10 de setiembre</strong>. Los registros enviados ahora no serán considerados para el beneficio, pero puedes igualmente enviarlos.';
+    }
+  }
+  checkDeadline();
+
+  // ---------- Validadores ----------
+  const validators = {
+    ref_nombre: v => v.trim().length >= 3,
+    ref_documento: v => /^[0-9]{8}$/.test(v.trim()) || /^[A-Za-z0-9]{6,12}$/.test(v.trim()),
+    ref_correo: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    ref_celular: v => /^[0-9]{9}$/.test(v.trim()),
+    ref_programa: v => v.trim().length > 0,
+
+    inv_nombre: v => v.trim().length >= 3,
+    inv_documento: v => /^[0-9]{8}$/.test(v.trim()) || /^[A-Za-z0-9]{6,12}$/.test(v.trim()),
+    inv_correo: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    inv_celular: v => /^[0-9]{9}$/.test(v.trim()),
+    inv_programa: v => v.trim().length > 0,
+  };
+
+  function fieldValue(name){
+    const el = form.querySelector(`[name="${name}"]`);
+    return el ? el.value : '';
+  }
+
+  function setError(name, show){
+    const msg = form.querySelector(`.error-msg[data-error-for="${name}"]`);
+    const input = form.querySelector(`#${name}, [name="${name}"]`);
+    if (msg) msg.classList.toggle('show', show);
+    if (input && input.tagName !== 'INPUT' || (input && input.type !== 'radio' && input.type !== 'checkbox')){
+      if (input) input.setAttribute('aria-invalid', show ? 'true' : 'false');
+    }
+  }
+
+  function validateField(name){
+    const value = fieldValue(name);
+    const ok = validators[name](value);
+    setError(name, !ok);
+    return ok;
+  }
+
+  function validateRadioGroup(name, errorKey){
+    const checked = form.querySelector(`input[name="${name}"]:checked`);
+    const ok = !!checked;
+    const msg = form.querySelector(`.error-msg[data-error-for="${errorKey}"]`);
+    if (msg) msg.classList.toggle('show', !ok);
+    return ok;
+  }
+
+  function validateCheckbox(id){
+    const el = document.getElementById(id);
+    const ok = el.checked;
+    const msg = form.querySelector(`.error-msg[data-error-for="${id}"]`);
+    if (msg) msg.classList.toggle('show', !ok);
+    return ok;
+  }
+
+  // live validation on blur
+  Object.keys(validators).forEach(name => {
+    const el = form.querySelector(`[name="${name}"]`);
+    if (!el) return;
+    el.addEventListener('blur', () => validateField(name));
+    el.addEventListener('input', () => {
+      if (el.getAttribute('aria-invalid') === 'true') validateField(name);
+    });
+  });
+
+  function validateAll(){
+    let firstInvalid = null;
+    let allOk = true;
+
+    Object.keys(validators).forEach(name => {
+      const ok = validateField(name);
+      if (!ok){ allOk = false; if (!firstInvalid) firstInvalid = form.querySelector(`[name="${name}"]`); }
+    });
+
+    const admisionOk = validateRadioGroup('inv_admision', 'inv_admision');
+    if (!admisionOk){ allOk = false; if (!firstInvalid) firstInvalid = form.querySelector('#admision_si'); }
+
+    const auth1Ok = validateCheckbox('auth_referido');
+    if (!auth1Ok){ allOk = false; if (!firstInvalid) firstInvalid = document.getElementById('auth_referido'); }
+
+    const auth2Ok = validateCheckbox('auth_politica');
+    if (!auth2Ok){ allOk = false; if (!firstInvalid) firstInvalid = document.getElementById('auth_politica'); }
+
+    if (firstInvalid) firstInvalid.focus({ preventScroll: false });
+    return allOk;
+  }
+
+  // ---------- Código de referido ----------
+  function generarCodigoReferido(){
+    const t = Date.now().toString(36).toUpperCase();
+    const r = Math.random().toString(36).slice(2, 6).toUpperCase();
+    return `REF-${t}-${r}`;
+  }
+
+  // ---------- Envío ----------
+  function setLoading(isLoading){
+    submitBtn.disabled = isLoading;
+    submitBtn.classList.toggle('loading', isLoading);
+    btnLabel.textContent = isLoading ? 'Enviando...' : 'Enviar registro';
+  }
+
+  let lastPayload = null;
+
+  async function sendPayload(payload){
+    setLoading(true);
+    networkError.classList.remove('show');
+    try{
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        // text/plain evita el preflight CORS con Apps Script; el backend
+        // debe leer el JSON desde e.postData.contents.
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) throw new Error('Respuesta no OK');
+
+      let data = {};
+      try{ data = await res.json(); } catch(e){ data = { success: true, duplicate: false }; }
+
+      showSuccess(payload.codigo_referido, !!data.duplicate);
+      form.reset();
+    } catch(err){
+      setLoading(false);
+      networkError.classList.add('show');
+    }
+  }
+
+  function showSuccess(codigo, isDuplicate){
+    setLoading(false);
+    form.style.display = 'none';
+    successCode.textContent = codigo;
+    duplicateNote.style.display = isDuplicate ? 'flex' : 'none';
+    successPanel.classList.add('show');
+    successPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!validateAll()) return;
+
+    const payload = {
+      ref_nombre: fieldValue('ref_nombre').trim(),
+      ref_documento: fieldValue('ref_documento').trim(),
+      ref_correo: fieldValue('ref_correo').trim(),
+      ref_celular: fieldValue('ref_celular').trim(),
+      ref_programa: fieldValue('ref_programa'),
+
+      inv_nombre: fieldValue('inv_nombre').trim(),
+      inv_documento: fieldValue('inv_documento').trim(),
+      inv_correo: fieldValue('inv_correo').trim(),
+      inv_celular: fieldValue('inv_celular').trim(),
+      inv_programa: fieldValue('inv_programa'),
+      inv_admision: (form.querySelector('input[name="inv_admision"]:checked') || {}).value || '',
+
+      auth_referido: document.getElementById('auth_referido').checked,
+      auth_politica: document.getElementById('auth_politica').checked,
+
+      fecha_registro: new Date().toISOString(),
+      codigo_referido: generarCodigoReferido()
+    };
+
+    lastPayload = payload;
+    sendPayload(payload);
+  });
+
+  retryBtn.addEventListener('click', function(){
+    if (lastPayload) sendPayload(lastPayload);
+  });
+
+})();
+</script>
+
+</body>
+</html>
