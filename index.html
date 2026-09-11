@@ -732,7 +732,7 @@
   function checkDeadline(){
     if (Date.now() > DEADLINE_UTC.getTime()){
       deadlineBanner.classList.add('expired');
-      deadlineText.innerHTML = 'El plazo para este formulario venció el <strong>jueves 10 de setiembre</strong>. Los registros enviados ahora no serán considerados para el beneficio, pero puedes igualmente enviarlos.';
+      deadlineText.innerHTML = 'El plazo para este formulario vence el <strong>viernes 11 de setiembre</strong>. Los registros enviados posteriormente a esta fecha no serán considerados para el beneficio, pero puedes igualmente enviarlos.';
     }
   }
   checkDeadline();
